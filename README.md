@@ -17,7 +17,7 @@
  For example consider tennis match where both players (A and B) have equal chances.
  It means that the sum of bets should be equal for both players.
  Odds of player A are calculated based on following formula:
- ```all funds in contract / funds betting on player A``` <br/>
+ ```all funds in contract / funds betting on player A```. <br/>
  This means that in this case both players has odds `2:1`. 
  Even the biggest betting office can not give you such a good odds because they need to stay safely in profit.
  Usually you get `1.8:1` when there are equal chances for both players. <br/>
