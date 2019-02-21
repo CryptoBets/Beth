@@ -88,10 +88,10 @@ contract Match {
         
         uint winned_sum = 0;
         // return some fee thanks to user making the withdrawal
-        uint winner_fraction = bets_sum[uint(result)]/(bets[msg.sender].value*(dev_fee+10)/dev_fee); 
+        uint winner_bet = bets[msg.sender].value*(dev_fee+10)/dev_fee; 
         for (uint8 i = 0; i < options_num; i++){
             if (i != uint8(result)) {
-                uint option_win = bets_sum[i]/winner_fraction;
+                uint option_win = bets_sum[i]*bets_sum[uint(result)]/winner_bet;
                 winned_sum += option_win;
                 bets_sum[i] -= option_win;
             }
@@ -169,10 +169,10 @@ contract Match {
         require(bets[winner].value > 0, "your funds has been already withdrawn");
         
         uint winned_sum = 0;
-        uint winner_fraction = bets_sum[uint8(result)]/bets[winner].value; 
+        uint winner_bet = bets[msg.sender].value*(dev_fee+10)/dev_fee; 
         for (uint8 i = 0; i < options_num; i++){
             if (i != uint8(result)) {
-                uint option_win = bets_sum[i]/winner_fraction;
+                uint option_win = bets_sum[i]*bets_sum[uint(result)]/winner_bet;
                 winned_sum += option_win;
                 bets_sum[i] -= option_win;
             }
