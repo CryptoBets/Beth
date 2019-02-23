@@ -29,13 +29,13 @@ contract Match {
     uint32 constant hour = 60*60;
 
     // Match constructor - this contract contains all bets which belongs to certain match
-    constructor(uint32 _match_id, address payable _admin, uint _match_time, uint8 _options_num,
-                string memory _description, uint32 _dev_fee, uint _min_bet) public {
+    constructor(uint32 _match_id, address payable _admin, uint _match_time, uint _closing_time,
+                uint8 _options_num, string memory _description, uint32 _dev_fee, uint _min_bet) public {
         owner = msg.sender;         // owning contract
         admin = _admin;             // set admin to prevent owning contract failure
         match_id = _match_id;
         match_time = _match_time;   // match start time
-        closing_time = match_time - 3*hour;
+        closing_time = _closing_time;
         canceled = false;
         result = -1;                // -1 unknown ... the rest corresponds to option
         options_num = _options_num; // possible match results
@@ -207,13 +207,13 @@ contract EthBet {
     }
     
     // method for initialisation of match, match_time is in UTC unix time in sec
-    function init_match(uint match_time, uint8 options_num, string calldata description) external {
+    function init_match(uint match_time, uint closing_time, uint8 options_num, string calldata description) external {
         require(msg.sender == admin, "only owner can call this");
         require(options_num > 1, "every match must have at least two stacks");
         
         last_match_id++;
-        matches[last_match_id] = new Match(last_match_id, admin, match_time, options_num,
-                                           description, dev_fee, min_bet);
+        matches[last_match_id] = new Match(last_match_id, admin, match_time, closing_time, 
+                                           options_num, description, dev_fee, min_bet);
     }
 
     // SETTERS
