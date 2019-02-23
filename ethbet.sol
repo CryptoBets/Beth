@@ -210,6 +210,7 @@ contract EthBet {
     function init_match(uint match_time, uint closing_time, uint8 options_num, string calldata description) external {
         require(msg.sender == admin, "only owner can call this");
         require(options_num > 1, "every match must have at least two stacks");
+        require(closing_time <= match_time - 3600);
         
         last_match_id++;
         matches[last_match_id] = new Match(last_match_id, admin, match_time, closing_time, 
