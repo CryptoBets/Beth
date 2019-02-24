@@ -194,27 +194,25 @@ contract Match {
 contract EthBet {
     address payable private admin;
     mapping (uint32 => Match) public matches;
-    uint32 public last_match_id;
     uint32 public dev_fee;
     uint public min_bet;
     
     // Parent contract constructor
     constructor() public {
         admin = msg.sender;
-        last_match_id = 0;
         dev_fee = 975;
         min_bet = 10 finney;
     }
     
     // method for initialisation of match, match_time is in UTC unix time in sec
-    function init_match(uint match_time, uint closing_time, uint8 options_num, string calldata description) external {
+    function init_match(uint match_time, uint closing_time, uint8 options_num, string calldata description, uint32 _id) external {
         require(msg.sender == admin, "only owner can call this");
         require(options_num > 1, "every match must have at least two stacks");
-        require(closing_time <= match_time - 3600);
+        require(closing_time <= match_time - 3600, "wrong match times");
+        require(matches[_id] == Match(0), "match with this id already exists");
         
-        last_match_id++;
-        matches[last_match_id] = new Match(last_match_id, admin, match_time, closing_time, 
-                                           options_num, description, dev_fee, min_bet);
+        matches[_id] = new Match(_id, admin, match_time, closing_time, 
+                                 options_num, description, dev_fee, min_bet);
     }
 
     // SETTERS
