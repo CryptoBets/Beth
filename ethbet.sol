@@ -130,6 +130,10 @@ contract Match {
         return sum;
     }
     
+    function get_options_value() public view returns(uint[] memory) {
+        return bets_sum;
+    }
+    
     // SETTERS
     
     function set_result(uint8 _result) external {
