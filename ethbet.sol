@@ -139,7 +139,7 @@ contract Match {
     function set_result(uint8 _result) external {
         require(msg.sender == owner || msg.sender == admin, "only owner can call this");
         require(_result >= 0 && _result < options_num, "impossible result");
-        require(match_time + hour < now, "match is not finished yet");
+        require(match_time < now, "match is not finished yet");
         require(!canceled, "match was canceled");
         require(bets_sum[_result] > 0 && bets_sum[_result] < bets_sums());
         
@@ -148,6 +148,7 @@ contract Match {
     
     function cancel_match() external {
         require(msg.sender == owner || msg.sender == admin, "only owner can call this");
+        require(canceled == false, "the match is already canceled");
         require(result < 0, "match has already result");
         
         canceled = true;
