@@ -87,8 +87,7 @@ contract Match {
         require(bets[msg.sender].value > 0, "your funds has been already withdrawn");
         
         uint winned_sum = 0;
-        // return some fee thanks to user making the withdrawal
-        uint winner_bet = bets[msg.sender].value*(dev_fee+10)/dev_fee; 
+        uint winner_bet = bets[msg.sender].value; 
         for (uint8 i = 0; i < options_num; i++){
             if (i != uint8(result)) {
                 uint option_win = bets_sum[i]*bets_sum[uint(result)]/winner_bet;
@@ -97,9 +96,9 @@ contract Match {
             }
         }
         winned_sum += bets[msg.sender].value;
-        bets_sum[uint(result)] -= bets[msg.sender].value;
+        bets_sum[uint(result)] -= winner_bet;
         bets[msg.sender].value = 0;
-        msg.sender.transfer(winned_sum);
+        msg.sender.transfer(winned_sum*(dev_fee+10)/dev_fee);   // return 1% of fee
     }
     
     // ------------ ADMIN FUNCTIONS ------------
@@ -174,7 +173,7 @@ contract Match {
         require(bets[winner].value > 0, "your funds has been already withdrawn");
         
         uint winned_sum = 0;
-        uint winner_bet = bets[msg.sender].value*(dev_fee+10)/dev_fee; 
+        uint winner_bet = bets[msg.sender].value; 
         for (uint8 i = 0; i < options_num; i++){
             if (i != uint8(result)) {
                 uint option_win = bets_sum[i]*bets_sum[uint(result)]/winner_bet;
@@ -185,7 +184,7 @@ contract Match {
         winned_sum += bets[winner].value;
         bets_sum[uint8(result)] -= bets[winner].value;
         bets[winner].value = 0;
-        winner.transfer(winned_sum);
+        winner.transfer(winned_sum);        // this payout is triggered by admin, so there is no fee return
     }
 
     function close_contract() external {
