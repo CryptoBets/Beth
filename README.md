@@ -21,8 +21,8 @@
  This means that in this case both players has odds `2:1`. 
  Even the biggest betting office can not give you such a good odds because they need to stay safely in profit.
  Usually you get `1.8:1` when there are equal chances for both players. <br/>
- &nbsp; &nbsp; We are updating odds on our website after each bet but winners are payed by odds in the time of contract closure.
- That is usually **three hours before match time**. 
+ &nbsp; &nbsp; We are updating odds on our website every **5 min** but winners are payed by odds in the time of contract closure.
+ That is usually **few hours before match time**. 
  When the match is closed you can not make bet or discard your bet anymore.
  
  #### 2) Fees
@@ -36,7 +36,7 @@
  After this period the automatic payout is triggered and the contract which belongs to match is destroyed.
  
  #### 3) Warning
- &nbsp; &nbsp; You can not bet on multiple results in one match. All funds from previous bet will be reallocated to the new bet.
+ &nbsp; &nbsp; You can not bet on multiple results in one match from one address. All funds from previous bet will be reallocated to the new bet.
  We have **no access** to your funds, everything is stored on Ethereum blockchain.
  There is minimal bet, which is currently set to **10 finney** (0.01 ETH).
  We advise to set the bet size proportionally to the sum of funds in whole match, otherwise you can change the odds drastically.
