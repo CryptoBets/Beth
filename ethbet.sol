@@ -157,7 +157,6 @@ contract Match {
 
     function return_funds(address payable recipient) external {
         // in case of canceling the match, this method return funds of certain address
-        require(msg.sender == owner || msg.sender == admin, "only owner can call this");
         require(canceled, "match is not canceled, funds cannot be returned");
         
         uint return_value = bets[recipient].value*1000/dev_fee;   // return dev_fee
@@ -167,10 +166,10 @@ contract Match {
     }
     
     function payout(address payable winner) external {
-        require(msg.sender == owner || msg.sender == admin, "only owner can call this");
         require(result >= 0 && !canceled, "match is not finished");
         require(uint8(result) == bets[winner].option, "you are not a winner");
         require(bets[winner].value > 0, "your funds has been already withdrawn");
+        require(now > match_time + 24*3*hour, "too soon to autopayout");
         
         uint winned_sum = 0;
         uint winner_bet = bets[msg.sender].value; 
@@ -257,6 +256,7 @@ contract EthBet {
         require(msg.sender == admin, "only owner can call this");
         
         matches[_id].close_contract();
+        delete matches[_id];
     }
     
     function close_contract() external {
