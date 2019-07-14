@@ -188,7 +188,8 @@ contract Match {
 
     function close_contract() external {
         require(msg.sender == owner || msg.sender == admin, "only owner can call this");    
-        require(now > match_time + hour*24*7 || bets_sums() == 0, "match cannot be closed yet");
+        require(now > match_time + hour*24*3, "match cannot be closed yet");
+        require(result >= 0 || canceled, "match was not resolved");
         
         selfdestruct(admin);
     }
