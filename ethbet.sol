@@ -90,7 +90,7 @@ contract Match {
         uint winner_bet = bets[msg.sender].value; 
         for (uint8 i = 0; i < options_num; i++){
             if (i != uint8(result)) {
-                uint option_win = bets_sum[i]*bets_sum[uint(result)]/winner_bet;
+                uint option_win = bets_sum[i]*winner_bet/bets_sum[uint(result)];
                 winned_sum += option_win;
                 bets_sum[i] -= option_win;
             }
@@ -175,7 +175,7 @@ contract Match {
         uint winner_bet = bets[msg.sender].value; 
         for (uint8 i = 0; i < options_num; i++){
             if (i != uint8(result)) {
-                uint option_win = bets_sum[i]*bets_sum[uint(result)]/winner_bet;
+                uint option_win = bets_sum[i]*winner_bet/bets_sum[uint(result)];
                 winned_sum += option_win;
                 bets_sum[i] -= option_win;
             }
