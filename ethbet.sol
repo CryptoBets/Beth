@@ -105,10 +105,6 @@ contract Match {
     
     // GETTERS
     
-    function get_bettors() external view returns(address payable[] memory) {
-        return bettors;
-    }
-    
     function get_address_bet(address addr) external view returns(uint) {
         return bets[addr].value;
     }
