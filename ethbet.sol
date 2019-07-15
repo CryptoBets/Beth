@@ -113,6 +113,24 @@ contract Match {
         return sum;
     }
     
+    function get_address_option(address addr) external view returns(int16) {
+        if (bets[addr].value > 0) {
+            return bets[addr].option;
+        } else {
+            return -1;
+        }
+    }
+    
+    function get_unpaid_winners_in_nth_1000(uint32 n) public view returns(address payable[] memory) {
+        address payable[] memory ret = new address payable[](1000);
+        for (uint32 i = n*1000; i < (n+1)*1000; i++){
+            if (bets[bettors[i]].value > 0 && bets[bettors[i]].option == uint8(result)){
+                ret[i] = bettors[i];
+            }
+        }
+        return ret;
+    }
+    
     // SETTERS
     
     function set_result(uint8 _result) external {
