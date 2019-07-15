@@ -105,28 +105,12 @@ contract Match {
     
     // GETTERS
     
-    function get_address_bet(address addr) external view returns(uint) {
-        return bets[addr].value;
-    }
-    
-    function get_address_option(address addr) external view returns(int16) {
-        if (bets[addr].value > 0) {
-            return bets[addr].option;
-        } else {
-            return -1;
-        }
-    }
-    
     function bets_sums() public view returns(uint) {
         uint sum;
         for (uint8 i = 0; i < options_num; i++) {
             sum += bets_sum[i];
         }
         return sum;
-    }
-    
-    function get_options_value() public view returns(uint[] memory) {
-        return bets_sum;
     }
     
     // SETTERS
