@@ -188,7 +188,7 @@ contract Match {
 
     function close_contract() external {
         require(msg.sender == owner || msg.sender == admin, "only owner can call this");    
-        require(now > match_time + hour*24*3, "match cannot be closed yet");
+        require(now > match_time + hour*24*3 || bets_sum[uint8(result)] == 0, "match cannot be closed yet");
         require(result >= 0 || canceled, "match was not resolved");
         
         selfdestruct(admin);
@@ -235,10 +235,6 @@ contract EthBet {
     }
     
     // GETTERS
-    function get_match_address(uint32 _id) external view returns(address) {
-        return address(matches[_id]);
-    }
-    
     function get_my_options(uint32[] calldata _id) external view returns(int16[] memory) {
         uint size = _id.length;
         int16[] memory ret = new int16[](size);
