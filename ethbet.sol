@@ -105,6 +105,10 @@ contract Match {
     
     // GETTERS
     
+    function get_options_value() public view returns(uint[] memory) {
+        return bets_sum;
+    }
+    
     function bets_sums() public view returns(uint) {
         uint sum;
         for (uint8 i = 0; i < options_num; i++) {
