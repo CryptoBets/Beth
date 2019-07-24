@@ -125,14 +125,24 @@ contract Match {
         }
     }
     
-    function get_unpaid_winners_in_nth_1000(uint32 n) public view returns(address payable[] memory) {
-        address payable[] memory ret = new address payable[](1000);
-        for (uint32 i = n*1000; i < (n+1)*1000; i++){
+    function get_unpaid_winners_in_nth_100(uint32 n) public view returns(address payable[] memory) {
+        require(result >= 0, "no result - no unpaid winner")
+        
+        address payable[] memory ret = new address payable[](100);
+        uint max_size = (n+1)*100;
+        if (bettors.length < max_size){
+            max_size = bettors.length;
+        }
+        for (uint32 i = n*100; i < max_size; i++){
             if (bets[bettors[i]].value > 0 && bets[bettors[i]].option == uint8(result)){
                 ret[i] = bettors[i];
             }
         }
         return ret;
+    }
+    
+    function get_bettors_num() public view returns(uint32) {
+        return uint32(bettors.length);
     }
     
     // SETTERS
