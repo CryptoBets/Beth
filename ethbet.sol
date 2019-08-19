@@ -126,7 +126,7 @@ contract Match {
     }
     
     function get_unpaid_winners_in_nth_100(uint32 n) public view returns(address payable[] memory) {
-        require(result >= 0, "no result - no unpaid winner")
+        require(result >= 0, "no result - no unpaid winner");
         
         address payable[] memory ret = new address payable[](100);
         uint max_size = (n+1)*100;
