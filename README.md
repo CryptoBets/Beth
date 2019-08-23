@@ -1,5 +1,5 @@
-![EthBet](images/logo.png) <br/>
-# DAPP for sports betting
+![EthBet](images/bethlogo.png) <br/>
+# Place your beths!
 * **Win ethereum**
 * **Get the best odds on the internet**
 * **No registration needed**
