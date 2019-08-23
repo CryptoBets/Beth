@@ -1,4 +1,4 @@
-![EthBet](images/bethlogo.png) <br/>
+&nbsp; &nbsp; ![EthBet](images/bethlogo.png) <br/>
 # Place your beths!
 * **Win ethereum**
 * **Get the best odds on the internet**
